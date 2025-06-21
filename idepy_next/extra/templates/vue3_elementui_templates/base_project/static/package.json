@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "element-plus": "^2.9.0",
+    "tailwindcss": "^3.4.15",
+    "vue": "^3.5.13"
+  },
+  "scripts": {
+    "init":"npm install ",
+    "tailwindcss":"npx tailwindcss -i ./src/lib/tailwindcss.base.css -o ./src/lib/tailwindcss.css --watch"
+  }
+}

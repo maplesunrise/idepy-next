@@ -1,0 +1,75 @@
+    #app{
+        min-height: 100vh;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .title {
+        padding: 8px 0;
+        padding-left: 16px;
+        font-size: 12px;
+        color: #494949;
+    }
+
+    .message {
+        line-height: 1.5;
+        font-size: 14px;
+        padding: 0 16px;
+        color: #2B2B2C;
+        box-sizing: border-box;
+
+    }
+
+    .close-btn {
+        font-size: 12px;
+        color: #6b6b6b;
+        //background: #4b4b52;
+        width: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .close-btn:hover {
+        color: white;
+        background: rgb(196, 43, 28);
+    }
+
+    .primary-btn {
+        font-size: 14px;
+        color: white;
+        background: var( --el-color-primary );
+        padding: 4px 16px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .primary-btn:hover {
+        color: white;
+        background: var( --el-color-primary-light-3);
+    }
+
+    .btn-list {
+        display: flex;
+        justify-content: end;
+
+        box-sizing: border-box;
+        /*padding: 0 16px;*/
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: calc(100vh - 40px);
+        padding: 0 16px;
+    }

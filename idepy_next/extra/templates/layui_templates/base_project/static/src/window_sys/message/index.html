@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提示</title>
+    <link rel="stylesheet" href="../../lib/idepy.css">
+    <link rel="stylesheet" href="../../lib/icon/iconfont.css">
+    <link rel="stylesheet" href="./index.css">
+
+</head>
+<body>
+    <div id="app" class="idepy-drag-region">
+        <div  style="display: flex;justify-content: space-between;font-size: 16px;">
+            <div class="title">{{{ title }}}</div>
+            <div class="ctouy i-cty-close close-btn"
+                 onclick="closeWindow()"></div>
+        </div>
+
+        <div class="content">
+            {{{ message }}}
+
+            <div class="btn-list">
+                <div class="primary-btn" onclick="closeWindow()">确认</div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+
+<script src="./index.js"></script>
+</html>

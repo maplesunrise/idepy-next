@@ -1,0 +1,25 @@
+{
+  "name": "IdepyNextProject",
+  "description": "IdepyNextProject",
+  "version": "1.0.0.0",
+  "author": "IDEPY",
+  "copyright": "IDEPY",
+  "project_type":"layui",
+  "build": {
+    "icon": "icon.ico",
+    "output": "output",
+    "entry": "main.py",
+    "include_data": [
+      {
+        "source": "static/src",
+        "dist": "static/src"
+      }
+    ],
+    "ext_params": ""
+  },
+  "cli": {
+    "templates_dir": {
+      "base_window": null
+    }
+  }
+}

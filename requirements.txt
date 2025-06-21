@@ -1,0 +1,12 @@
+proxy-tools
+typing_extensions
+pythonnet
+bottle~=0.13.3
+jinja2~=3.1.6
+keyboard~=0.13.5
+pystray~=0.19.5
+pillow~=10.4.0
+winshell~=0.6
+psutil~=7.0.0
+requests~=2.32.3
+setuptools~=68.2.0

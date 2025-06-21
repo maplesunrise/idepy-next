@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IdepyNext</title>
+
+    <!--    样式相关内容应放到head，避免样式渲染错位跳转-->
+    <!--    可以修改该文件自定义整体风格颜色-->
+    <link rel="stylesheet" href="../../lib/idepy.css">
+
+    <!--    引入layui css-->
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+
+    <!--    引入样式TailwindCSS，如不需要可移除-->
+    <script src="../../lib/tailwindcss/tailwindcss.js"></script>
+    <script src="../../lib/tailwindcss/tailwindcss.theme.js"></script>
+
+
+
+
+</head>
+<body>
+
+    <!-- 绘制页面主要内容 -->
+    <div id="app" >
+        <div class="space-y-4 min-h-[100vh] flex flex-col items-center pt-16 ">
+            <div>
+                <img class="aspect-square w-20" src="../../assets/logo.webp" alt="logo"/>
+            </div>
+            <div class="text-3xl text-black-primary ">
+                Hello, IDEPY-Next!
+            </div>
+            <div class="text-black-regular text-sm mb-4">
+                当前正在使用Layui构建页面
+            </div>
+            <div class="version text-sm text-primary">VER <span id="ver"></span></div>
+
+
+            <div class="space-x-4">
+
+                 <a href="https://idepy.com" target="_blank">
+                    <button class="layui-btn  layui-bg-blue">打开官网</button>
+                </a>
+                 <a href="https://idepy.com/document" target="_blank">
+                    <button class="layui-btn  layui-bg-blue">帮助文档</button>
+                </a>
+                 <a href="https://idepy.com/tools" target="_blank">
+                    <button class="layui-btn  layui-bg-blue">开发工具</button>
+                </a>
+            </div>
+
+
+
+            <div class="flex gap-4">
+                <div class="flex flex-col gap-1 text-center">
+                    <div class="text-black-primary text-sm">元素绑定演示</div>
+                    <input  id="input1"  class="layui-input " placeholder="Layui输入框..."  />
+                    <button type="button" class="layui-btn layui-bg-blue layui-btn-sm" id="button1">按钮元素</button>
+
+                </div>
+            </div>
+
+
+
+
+            <!--  可以通过jinjia2语法，快速复用模板。-->
+            {% include "templates/footer.html" %}
+
+            <!--  jinjia的模板变量语法，使用3花括号 -->
+            <a target="_blank" class="text-sm text-black-regular" href="{{{ jinjia_var2 }}}">{{{ jinjia_var1 }}}</a>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- 绘制页面主要内容结束 -->
+
+</body>
+<footer>
+    <!--    常用工具函数库-->
+    <script src="../../lib/lodash.js"></script>
+
+    <!--    引入Jquery-->
+     <script src="../../lib/jquery.js"></script>
+
+    <!--    引入layui-->
+     <script src="../../lib/layui/layui.js"></script>
+
+
+    <!--    挂载框架基本内容相关逻辑-->
+    <script src="../../lib/idepy.js"></script>
+
+    <!--    挂载页面相关样式和逻辑-->
+    <link rel="stylesheet" href="./index.css">
+    <script type="module" src="./index.js"></script>
+
+
+
+
+
+
+</footer>
+</html>

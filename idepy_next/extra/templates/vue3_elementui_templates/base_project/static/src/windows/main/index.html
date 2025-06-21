@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IdepyNext</title>
+
+    <!--    样式相关内容应放到head，避免样式渲染错位跳转-->
+    <!--    可以修改该文件自定义整体风格颜色-->
+    <link rel="stylesheet" href="../../lib/idepy.css">
+    <!--    引入ElementUI样式-->
+    <link rel="stylesheet" href="../../lib/element-plus/element-plus.css">
+    <!--    引入图标库，按情况引入，如不需要可移除-->
+    <link rel="stylesheet" href="../../lib/icon/iconfont.css">
+
+    <!--    引入样式TailwindCSS，如不需要可移除-->
+
+    <script src="../../lib/tailwindcss/tailwindcss.js"></script>
+    <script src="../../lib/tailwindcss/tailwindcss.theme.js"></script>
+
+
+</head>
+<body>
+
+    <!-- 绘制页面主要内容 -->
+    <div id="app" v-cloak>
+        <div class="space-y-4 min-h-[100vh] flex flex-col items-center pt-16">
+            <div>
+                <img class="aspect-square w-20" src="../../assets/logo.webp" alt="logo"/>
+            </div>
+            <div class="text-3xl text-black-primary ">
+                Hello, IDEPY-Next!
+            </div>
+            <div class="text-black-regular text-sm mb-4">
+                当前正在使用Vue3 + ElementPlus + TailwindCSS构建页面
+            </div>
+            <div class="version text-sm text-primary">VER {{ rData?.version || 'Unknown' }}</div>
+
+
+            <div class="space-x-4">
+
+                 <a href="https://idepy.com" target="_blank">
+                    <el-button type="primary">打开官网</el-button>
+                </a>
+                 <a href="https://idepy.com/document" target="_blank">
+                    <el-button type="primary">帮助文档</el-button>
+                </a>
+                 <a href="https://idepy.com/tools" target="_blank">
+                    <el-button type="primary">开发工具</el-button>
+                </a>
+            </div>
+
+
+            <!-- 演示功能 -->
+        <el-divider class="mt-4"></el-divider>
+
+
+
+            <div class="flex gap-4">
+                <div class="flex flex-col gap-1 text-center">
+                    <div class="text-black-primary text-sm">Vue框架绑定演示</div>
+                    <el-input id="vue_input" v-model="rData.input" placeholder="随便输入点什么内容..." ></el-input>
+                    <el-button id="vue_button">
+                        <!--       注意，部分图标引入要拆分，如HomeFilled改为home-filled -->
+                        <el-icon class="mr-2"><home-filled /></el-icon>
+                        Vue按钮元素
+                    </el-button>
+                </div>
+
+                <div class="flex flex-col gap-1 text-center">
+                    <div class="text-black-primary text-sm">原生元素绑定演示</div>
+                    <input class="border px-0.5 py-1" id="input1" placeholder="原生输入框..."  />
+                    <button class="border text-black-primary text-sm rounded px-0.5 py-1.5 " id="button1">原生按钮元素</button>
+
+                </div>
+            </div>
+
+
+
+
+            <!--  可以通过jinjia2语法，快速复用模板。-->
+            {% include "templates/footer.html" %}
+
+            <!--  jinjia的模板变量语法，使用3花括号 -->
+            <a target="_blank" class="text-sm text-black-regular" href="{{{ jinjia_var2 }}}">{{{ jinjia_var1 }}}</a>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- 绘制页面主要内容结束 -->
+
+</body>
+<footer>
+    <!--    常用工具函数库-->
+    <script src="../../lib/lodash.js"></script>
+
+    <!--    引入Vue3-->
+    <script src="../../lib/vue.global.js"></script>
+    <!--    ElementUI及中文-->
+    <script src="../../lib/element-plus/element-icons.js"></script>
+    <script src="../../lib/element-plus/element-zh-cn.js"></script>
+    <script src="../../lib/element-plus/element-plus.js"></script>
+
+
+
+    <!--    挂载框架基本内容相关逻辑-->
+    <script src="../../lib/idepy.js"></script>
+
+    <!--    挂载页面相关样式和逻辑-->
+    <link rel="stylesheet" href="./index.css">
+    <script type="module" src="./index.js"></script>
+
+
+
+
+
+
+</footer>
+</html>

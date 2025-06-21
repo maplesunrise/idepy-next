@@ -1,0 +1,74 @@
+:root:root{
+--el-color-primary: rgba(76,106,255,1) !important;
+--el-color-primary-light-3: rgba(130,151,255,1) !important;
+--el-color-primary-light-5: rgba(166,180,255,1) !important;
+--el-color-primary-light-7: rgba(201,210,255,1) !important;
+--el-color-primary-light-8: rgba(219,225,255,1) !important;
+--el-color-primary-light-9: rgba(237,240,255,1) !important;
+--el-color-primary-dark-2: rgba(61,85,204,1) !important;
+--el-color-info: rgba(144,147,153,1) !important;
+--el-color-info-light-3: rgba(177,179,184,1) !important;
+--el-color-info-light-5: rgba(200,201,204,1) !important;
+--el-color-info-light-7: rgba(222,223,224,1) !important;
+--el-color-info-light-8: rgba(233,233,235,1) !important;
+--el-color-info-light-9: rgba(244,244,245,1) !important;
+--el-color-info-dark-2: rgba(115,118,122,1) !important;
+--el-color-success: rgba(103,194,58,1) !important;
+--el-color-success-light-3: rgba(149,212,117,1) !important;
+--el-color-success-light-5: rgba(179,224,156,1) !important;
+--el-color-success-light-7: rgba(209,237,196,1) !important;
+--el-color-success-light-8: rgba(225,243,216,1) !important;
+--el-color-success-light-9: rgba(240,249,235,1) !important;
+--el-color-success-dark-2: rgba(82,155,46,1) !important;
+--el-color-warning: rgba(230,162,60,1) !important;
+--el-color-warning-light-3: rgba(238,190,118,1) !important;
+--el-color-warning-light-5: rgba(242,208,158,1) !important;
+--el-color-warning-light-7: rgba(248,227,196,1) !important;
+--el-color-warning-light-8: rgba(250,236,216,1) !important;
+--el-color-warning-light-9: rgba(252,246,236,1) !important;
+--el-color-warning-dark-2: rgba(184,130,48,1) !important;
+--el-color-danger: rgba(245,108,108,1) !important;
+--el-color-danger-light-3: rgba(248,152,152,1) !important;
+--el-color-danger-light-5: rgba(250,182,182,1) !important;
+--el-color-danger-light-7: rgba(252,211,211,1) !important;
+--el-color-danger-light-8: rgba(253,226,226,1) !important;
+--el-color-danger-light-9: rgba(254,240,240,1) !important;
+--el-color-danger-dark-2: rgba(196,86,86,1) !important;
+--van-primary-color: rgba(76,106,255,1) !important;
+}
+
+
+/* v-cloak 样式：显示加载动画 */
+[v-cloak] {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: white;
+
+  z-index: 9999;
+}
+
+/* 加载动画内容 */
+[v-cloak]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top-color: var( --el-color-primary );
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+/* 动画效果 */
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
