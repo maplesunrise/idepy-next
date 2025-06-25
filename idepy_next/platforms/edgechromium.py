@@ -236,12 +236,19 @@ class EdgeChrome:
                         **idepy_settings.DEFAULT_WINDOW_GROUP_ARGS
                     )
                 window_args = webview_settings['OPEN_EXTERNAL_LINKS_IN_WINDOW_ARGS']
+                if window_args.get('js_api_class'):
+                    api = window_args.get('js_api_class')
+                    window_args['js_api'] = api()
+                    del window_args['js_api_class']
+
                 window_ars = {
                     "title": "网页",
                     "url": str(args.get_Uri()),
                     "hidden": True,
                     **window_args
                 }
+
+
                 def loaded(window):
 
                     w.title = json.loads(window.run_js("document.title"))

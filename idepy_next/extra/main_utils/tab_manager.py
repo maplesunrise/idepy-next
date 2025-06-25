@@ -165,6 +165,7 @@ class TabbedFormManager:
 
         tab_count = self.tab_control.TabCount
         if tab_count == 0:
+            self.main_form.Close()
             return  # 所有 tab 都被关闭
 
         # 浏览器行为：优先选择右侧 tab，否则选左侧
@@ -172,6 +173,8 @@ class TabbedFormManager:
             self.tab_control.SelectedIndex = tab_index
         else:
             self.tab_control.SelectedIndex = tab_index - 1
+
+
 
 
 
