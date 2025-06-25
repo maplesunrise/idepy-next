@@ -8,8 +8,10 @@ from threading import Semaphore
 
 import clr
 
+import idepy_next
 from idepy_next import _state, settings as webview_settings
 from idepy_next.dom import _dnd_state
+
 from idepy_next.util import DEFAULT_HTML, create_cookie, interop_dll_path, js_bridge_call, inject_idepy, resolve_config
 
 clr.AddReference('System.Windows.Forms')
@@ -29,6 +31,7 @@ clr.AddReference(interop_dll_path('Microsoft.Web.WebView2.WinForms.dll'))
 
 from Microsoft.Web.WebView2.Core import CoreWebView2Cookie, CoreWebView2ServerCertificateErrorAction, CoreWebView2Environment
 from Microsoft.Web.WebView2.WinForms import CoreWebView2CreationProperties, WebView2
+
 
 for platform in ('win-arm64', 'win-x64', 'win-x86'):
     os.environ['Path'] += ';' + interop_dll_path(platform)
@@ -217,11 +220,47 @@ class EdgeChrome:
 
     def on_new_window_request(self, sender, args):
         args.set_Handled(True)
+        try:
 
-        if webview_settings['OPEN_EXTERNAL_LINKS_IN_BROWSER']:
-            webbrowser.open(str(args.get_Uri()))
-        else:
-            self.load_url(str(args.get_Uri()))
+            if webview_settings.get('OPEN_EXTERNAL_LINKS_IN_WINDOW_GROUP'):
+                from idepy_next.extra import settings as idepy_settings
+
+                from idepy_next.extra.main_utils.tab_manager import create_window_group
+
+                if (
+                        not idepy_settings.DEFAULT_WINDOW_GROUP_INSTANCE
+                        or not idepy_settings.DEFAULT_WINDOW_GROUP_INSTANCE.native.main_form.IsHandleCreated
+                ):
+
+                    idepy_settings.DEFAULT_WINDOW_GROUP_INSTANCE = create_window_group(
+                        **idepy_settings.DEFAULT_WINDOW_GROUP_ARGS
+                    )
+                window_args = webview_settings['OPEN_EXTERNAL_LINKS_IN_WINDOW_ARGS']
+                window_ars = {
+                    "title": "网页",
+                    "url": str(args.get_Uri()),
+                    "hidden": True,
+                    **window_args
+                }
+                def loaded(window):
+
+                    w.title = json.loads(window.run_js("document.title"))
+                    idepy_settings.DEFAULT_WINDOW_GROUP_INSTANCE.redraw()
+
+
+                w = idepy_next.create_window(**window_ars)
+
+                w.events.loaded += loaded
+                idepy_settings.DEFAULT_WINDOW_GROUP_INSTANCE.add(w)
+                return True
+
+            if webview_settings['OPEN_EXTERNAL_LINKS_IN_BROWSER']:
+                webbrowser.open(str(args.get_Uri()))
+            else:
+                self.load_url(str(args.get_Uri()))
+        except Exception as e:
+
+            logger.error(e)
 
     def on_source_changed(self, sender, args):
         self.url = sender.Source

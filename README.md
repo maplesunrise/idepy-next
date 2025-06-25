@@ -2,10 +2,10 @@
 
 `IDEPY Next`是一个专注于Windows桌面应用开发Python框架，基于pywebview深度定制。
 
-它让你能够使用JavaScript、HTML和CSS为Python程序构建现代化GUI，具有Python风格的数据管理和事件绑定功能，实现高效、简洁且功能丰富的桌面应用开发体验。
+它让你能够使用JavaScript、HTML和CSS为Python程序构建现代化GUI，具有Python风格的数据管理和事件绑定功能，助你高效实现简洁且功能丰富的桌面应用。
 
 
-* 它继承了 Web 技术构建 GUI 的灵活性
+* 它继承了 Web 技术构建 GUI 的灵活性D:\code_hive\code2026\idepy-next
 * 它大幅扩展了工程能力和 Windows 桌面生态集成功能，降低开发门槛，提升项目稳定性与易用性
 * 增加了数据管理API和事件绑定语法糖，jinjia2模板，使开发更符合Python GUI的习惯，显著提升开发效率
 * 实现了工程化支持，提供了一套包含Vue、JQuery、Layui、BootStrap、ElementPlus的现代化模板，极大简化了项目入门和开发流程

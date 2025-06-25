@@ -16,10 +16,10 @@ setup(
     version=idepy_next._version.version,  # 包的版本
     description='Build GUI for your Python program with JavaScript, HTML, and CSS, featuring Python-style data management and event binding to make development more intuitive and productive. ',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     packages=find_packages(),  # 查找所有包
     url="https://idepy.com",
     author="IDEPY Team",
-
     license='BSD3',
     author_email="maplesunrise@foxmail.com",
     install_requires=[  # 安装依赖

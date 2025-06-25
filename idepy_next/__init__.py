@@ -39,6 +39,8 @@ from idepy_next.window import Window
 
 # 设置默认服务器
 from idepy_next.extra.main_utils.server import BottleCustom
+
+
 http.BottleServer = BottleCustom
 
 __all__ = (
@@ -93,6 +95,8 @@ settings = ImmutableDict({
     'OPEN_DEVTOOLS_IN_DEBUG': True,
     'REMOTE_DEBUGGING_PORT': None,
     'IGNORE_SSL_ERRORS': False,
+    'OPEN_EXTERNAL_LINKS_IN_WINDOW_GROUP': False,
+    'OPEN_EXTERNAL_LINKS_IN_WINDOW_ARGS': {}
 })
 
 _state = ImmutableDict({
@@ -208,6 +212,8 @@ def start(
     for window in windows:
         window._initialize(guilib)
 
+
+
     if ssl:
         for window in windows:
             window.gui.add_tls_cert(certfile)
@@ -215,6 +221,10 @@ def start(
     if len(windows) > 1:
         thread = threading.Thread(target=_create_children, args=(windows[1:],))
         thread.start()
+
+    from .extra.main_utils.tab_manager import _check_grop_create_loop
+    threading.Thread(target=_check_grop_create_loop, args=(True,)).start()
+
 
     if func:
         if args is not None:
