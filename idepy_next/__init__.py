@@ -70,6 +70,8 @@ __all__ = (
     'bindElementEvent',
     'bindVueElementEvent',
 
+    'create_window_group'
+
 )
 
 logger = logging.getLogger('idepy')
@@ -490,4 +492,5 @@ import idepy_next.extra.dev_utils as dev_utils
 extra = MainExtraExport()
 from .extra.window_utils.api import WindowAPI
 from idepy_next.extra.window_utils.dom_utils import bindElementEvent, bindVueElementEvent, ElementEvent, Elements
+from idepy_next.extra.main_utils.tab_manager import create_window_group
 jinjia_data = {}
