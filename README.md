@@ -58,7 +58,7 @@ def input_change(self, *args, **kwargs):
 ## 安装
 通常可以通过以下命令安装IDEPY NEXT框架。
 ```bash
-pip install idepy-next
+pip install idepy_next
 ```
 
 ## 免责声明
