@@ -1,10 +1,7 @@
 import threading
 
 from pystray import Icon, MenuItem, Menu
-from PIL import Image, ImageDraw
-import sys
-
-
+from PIL import Image
 
 
 

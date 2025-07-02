@@ -142,3 +142,37 @@ def is_support_edgechromium():
 
 
 
+
+
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+def add_get_params(url, params):
+    """
+    为URL自动添加或更新GET参数。
+
+    :param url: 原始URL
+    :param params: 要添加或更新的参数字典
+    :return: 新的URL
+    """
+    # 拆分URL
+    parsed_url = urlparse(url)
+    # 解析原始参数
+    query_params = parse_qs(parsed_url.query)
+    # 更新参数（注意parse_qs的值是列表）
+    for key, value in params.items():
+        query_params[key] = [value]
+    # 构造新的查询字符串
+    new_query = urlencode(query_params, doseq=True)
+    # 组装新的URL
+    new_url = urlunparse(parsed_url._replace(query=new_query))
+    return new_url
+
+
+def message_box(content, title="提示"):
+    """
+    使用window弹出提示信息
+    :param content: 内容
+    :param title: 标题
+    :return:
+    """
+    import ctypes
+    ctypes.windll.user32.MessageBoxW(0, content, title, 0x40)  # 0x40 = MB_ICONINFORMATION

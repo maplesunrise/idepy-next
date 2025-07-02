@@ -202,6 +202,15 @@ class Window:
 
         # 控制本地网站加载逻辑
         def before_window_show(window):
+            from idepy_next.extra import settings as idepy_settings
+            if idepy_settings.PRIVATE_SERVER_START:
+                from idepy_next.extra.dev_utils import add_get_params
+                params = {
+                        "_aus":idepy_settings.PRIVATE_SERVER_USER,
+                        "_auspw":idepy_settings.PRIVATE_SERVER_PASSWORD,
+                }
+                window.original_url = add_get_params( window.original_url,params)
+
             if window.original_url and window.original_url.startswith('/window'):
                 new_url = idepy_next.http.global_server.address + str(window.original_url)
                 window.load_url(new_url)

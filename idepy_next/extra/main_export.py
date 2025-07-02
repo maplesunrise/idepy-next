@@ -3,8 +3,7 @@ import sys
 import threading
 import time
 import random
-from tkinter import messagebox
-import tkinter as tk
+
 
 import idepy_next
 from idepy_next.extra import settings, dev_utils
@@ -36,14 +35,6 @@ class MainExtraExport:
         Hotkeys.start()
 
 
-        def start_tkinter():
-            self.tk = tk.Tk()
-            self.tk.withdraw()
-            self.tk.mainloop()  # 运行 tkinter 的主事件循环
-
-        # 启动 tkinter 在单独的线程中，如果其他应用有tk线程，那么则无需创建
-        self.tkinter_thread = threading.Thread(target=start_tkinter, daemon=True)
-        self.tkinter_thread.start()
 
         # 修改默认服务器
         import idepy_next.http
@@ -54,9 +45,6 @@ class MainExtraExport:
         idepy_next.DEFAULT_HTTP_PORT = None
 
 
-    def stop_tkinter_thread(self):
-        """终止tkinter线程，针对需要单独实现tkiner的场景"""
-        self.tk.after(0, self.tk.destroy)
 
 
     def set_app(self, app_name="IdepyNext"):
@@ -173,7 +161,8 @@ class MainExtraExport:
         """
         from idepy_next.platforms.winforms import _is_chromium
         if not _is_chromium():
-            messagebox.showinfo('提示', '当前Net Framework、Webview2版本过旧，将开始安装相关程序依赖。')
+
+            dev_utils.message_box( '当前Net Framework、Webview2版本过旧，将开始安装相关程序依赖。')
 
             dev_utils.run_command(
                 settings.PROJECT_PATH + "/idepy_next/extra/env/NDP481-Web.exe"
@@ -181,7 +170,7 @@ class MainExtraExport:
             dev_utils.run_command(
                 settings.PROJECT_PATH + "/idepy_next/extra/env/MicrosoftEdgeWebview2Setup.exe"
             )
-            messagebox.showinfo('提示', '如安装完毕，重启程序即可。')
+            dev_utils.message_box('如安装完毕，重启程序即可。')
 
             if exit_now:
                 exit()
@@ -199,16 +188,7 @@ class MainExtraExport:
             else:
                 return None
 
-    def get_master_window(self):
-        """
-        获取主窗口
-        :return:
-        """
-        for w in idepy_next.windows:
-            if w.uid == 'master':
-                return w
-            else:
-                return None
+
 
     def _show_message(self, message, title="提示", height=200, width=400):
         wd = None

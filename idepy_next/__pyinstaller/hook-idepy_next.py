@@ -9,5 +9,5 @@ if is_win:
 
 datas += collect_data_files('idepy_next', subdir='js')
 datas += collect_data_files('idepy_next', subdir='extra/env')
-datas += collect_data_files('idepy_next', subdir='extra/dev_tools')
-datas += collect_data_files('idepy_next', subdir='extra/templates')
+# datas += collect_data_files('idepy_next', subdir='extra/dev_tools')
+# datas += collect_data_files('idepy_next', subdir='extra/templates')

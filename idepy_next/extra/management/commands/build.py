@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 
+
 from idepy_next.extra.management.builder import BuildConfig
 from idepy_next.extra.dev_utils import run_command
 
@@ -91,6 +92,7 @@ def use_pyinstaller_build(args, config):
         if icon:
             icon = os.path.join(cwd, icon)
             build_command.append(f'--icon "{icon}"', )
+            build_command.append(f'--add-data "{icon};."')
 
 
         output = config.get('build.output', "./output")
@@ -100,7 +102,6 @@ def use_pyinstaller_build(args, config):
         # 引入数据读取
         include_data = config.get('build.include_data', [])
         for dt in include_data:
-
             s = dt.get('source')
             s = os.path.join(cwd, s)
             d = dt.get('dist')
@@ -128,10 +129,27 @@ def use_pyinstaller_build(args, config):
         entry = os.path.join(cwd, entry)
 
 
+        # 打包资源，并加密
+        pack_resources = config.get('pack_resources', False)
+        pack_resources_password = config.get('pack_resources_password', "")
+        if pack_resources:
+            print("正在打包static/src资源，并加密，请稍后...")
+            if not os.path.exists("./static/src"):
+                print("静态资源目录不存在：./static/src，请检查！")
+                return
+            from idepy_next.extra.main_utils.resource_pack import ResourcePack
+            rp = ResourcePack(password=pack_resources_password)
+            rp.pack('./static/src', os.path.join(temp_dir, 'static.rpak'))
+            build_command.append(f'--add-data "static.rpak;."')
+            print("静态资源打包完毕!")
+
+            print("正在将static/src目录从打包目录移除...")
+            for c in build_command:
+                if "static/src" in c:
+                    build_command.remove(c)
+                    print("已将static/src移除打包目录。")
 
         print(f'正在编译【{name}.exe】，请稍等...')
-
-
 
         # 创建命令
         build_command.append(entry)
