@@ -236,7 +236,7 @@ def inject_idepy(platform: str, window: Window) -> str:
     thread = Thread(target=generate_js_object)
     thread.start()
 
-
+resize_mapper = {}
 def js_bridge_call(window: Window, func_name: str, param: Any, value_id: str) -> None:
     """
     Calls a function from the JS API and executes it in Python. The function is executed in a separate
@@ -265,6 +265,22 @@ def js_bridge_call(window: Window, func_name: str, param: Any, value_id: str) ->
 
     if func_name == 'idepyMoveWindow':
         window.move(*param)
+        return
+
+    if window.easy_resize and window.uid not in resize_mapper.keys():
+        from idepy_next.extra.main_utils.window_resizer import WindowResizer
+        resize_mapper[window.uid]: WindowResizer = WindowResizer(window)
+        resize_mapper[window.uid].start_thread()
+
+    if func_name == 'idepyResizeStart':
+        resize_mapper[window.uid].start(*param)
+        return
+
+    if func_name == 'idepyResizeMove':
+        return
+
+    if func_name == 'idepyResizeStop':
+        resize_mapper[window.uid].stop()
         return
 
     if func_name == 'idepyEventHandler':
@@ -345,6 +361,7 @@ def load_js_files(window: Window, platform: str) -> str:
                 params = {
                     'token': _TOKEN,
                     'platform': platform,
+                    'easy_resize': window.easy_resize,
                     'uid': window.uid,
                     'js_api_endpoint': window.js_api_endpoint
                 }

@@ -499,17 +499,28 @@ class BrowserView:
             else:
                 _toggle()
 
-        def resize(self, width, height, fix_point):
-            x = self.Location.X
-            y = self.Location.Y
+        def resize(self, width, height, fix_point, x=None, y=None):
+            nx = self.Location.X
+            ny = self.Location.Y
+            fx = nx
+            fy = ny
 
-            if fix_point & FixPoint.EAST:
-                x = x + self.Width - width
+            width = round(width * self.scale_factor)
+            height = round(height * self.scale_factor)
 
-            if fix_point & FixPoint.SOUTH:
-                y = y + self.Height - height
+            if x is None:
+                if fix_point & FixPoint.EAST:
+                    fx = nx + round((self.Width - width) / self.scale_factor)
+            else:
+                fx = x
 
-            windll.user32.SetWindowPos(self.Handle.ToInt32(), None, x, y, width, height, 64)
+            if y is None:
+                if fix_point & FixPoint.SOUTH:
+                    fy = ny + round((self.Height - height) / self.scale_factor)
+            else:
+                fy = y
+
+            windll.user32.SetWindowPos(self.Handle.ToInt32(), None, fx, fy, width, height, 64)
 
         def move(self, x, y):
             SWP_NOSIZE = 0x0001  # Retains the current size
@@ -879,10 +890,10 @@ def set_on_top(uid, on_top):
         i.TopMost = on_top
 
 
-def resize(width, height, uid, fix_point):
+def resize(width, height, uid, fix_point,x=None,y=None):
     i = BrowserView.instances.get(uid)
     if i:
-        i.resize(width, height, fix_point)
+        i.resize(width, height, fix_point,x,y)
 
 
 def move(x, y, uid):

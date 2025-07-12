@@ -274,12 +274,23 @@ class WindowAPI:
         """
         self._window().minimize()
 
+
+
+    def iglobal_restore_window(self):
+        """恢复窗口尺寸"""
+        self._window().restore()
+
     def iglobal_window_maximize(self):
         """
-        最大化窗口
-        :return:
+           最大化窗口
+           :return:
         """
+        from System.Windows.Forms import Screen
+        work_area = Screen.PrimaryScreen.WorkingArea
         self._window().maximize()
+        dpi = self._window().native.scale_factor
+        self._window().resize(work_area.Width / dpi, work_area.Height / dpi)
+        self._window().move(0, 0)
 
     def iglobal_window_hide(self):
         """

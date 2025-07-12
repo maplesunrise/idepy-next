@@ -1,6 +1,7 @@
 window.idepy = {
   token: '%(token)s',
   platform: '%(platform)s',
+  easy_resize: '%(easy_resize)s',
   api: {},
   _eventHandlers: {},
   _returnValues: {},

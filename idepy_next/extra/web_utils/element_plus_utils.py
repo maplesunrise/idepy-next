@@ -52,7 +52,7 @@ class ElementPlusUtils:
 
         self._window().evaluate_js('''
 
-                ElementPlus.ElMessageBox.confirm(`%s`,`%s`)
+                ElementPlus.ElMessageBox.confirm(`%s`,`%s`, {dangerouslyUseHTMLString:true})
 
                         ''' % (msg, title), callback)
 
@@ -69,7 +69,7 @@ class ElementPlusUtils:
         title = js_escape_regex(title)
         self._window().evaluate_js('''
             (async () => {
-       ElementPlus.ElMessageBox.alert(`%s`, `%s`)
+       ElementPlus.ElMessageBox.alert(`%s`, `%s`, {dangerouslyUseHTMLString:true})
         })();
                 ''' % (msg, title))
 

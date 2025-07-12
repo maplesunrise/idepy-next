@@ -282,7 +282,8 @@ def create_window(
     user_agent = None,
     REMOTE_DEBUGGING_PORT=None,
     webview2_ext_args = None,
-    document_loaded_script = None
+    document_loaded_script = None,
+    easy_resize = False
 
 ) -> Window:
     """
@@ -320,6 +321,7 @@ def create_window(
     :param draggable: 窗口是否可拖动
     :param zoomable: 窗口是否可缩放
     :param document_loaded_script: 每次文档元素加载完毕后，自动注入的脚本内容
+    :param easy_resize: 启用网页边缘模拟缩放模式，多用于创建frameless窗口，默认为 False。
     :return: window object.
     """
 
@@ -372,6 +374,7 @@ def create_window(
         REMOTE_DEBUGGING_PORT=REMOTE_DEBUGGING_PORT,
         webview2_ext_args=webview2_ext_args,
         document_loaded_script=document_loaded_script,
+        easy_resize=easy_resize
     )
 
 

@@ -119,7 +119,8 @@ class Window:
         user_agent = None,
         REMOTE_DEBUGGING_PORT = None,
         webview2_ext_args = None,
-        document_loaded_script = None
+        document_loaded_script = None,
+        easy_resize=False
 
 
 
@@ -142,6 +143,7 @@ class Window:
         self.text_select = text_select
         self.frameless = frameless
         self.easy_drag = easy_drag
+        self.easy_resize = easy_resize
         self.shadow = shadow
         self.focus = focus
         self.hidden = hidden
@@ -491,7 +493,7 @@ class Window:
 
     @_shown_call
     def resize(
-        self, width: int, height: int, fix_point: FixPoint = FixPoint.NORTH | FixPoint.WEST
+        self, width: int, height: int, fix_point: FixPoint = FixPoint.NORTH | FixPoint.WEST, x=None, y=None
     ) -> None:
         """
         Resize window
@@ -502,7 +504,7 @@ class Window:
             with bitwise operators.
             Example: FixPoint.NORTH | FixPoint.WEST
         """
-        self.gui.resize(width, height, self.uid, fix_point)
+        self.gui.resize(width, height, self.uid, fix_point,x,y)
 
     @_shown_call
     def maximize(self) -> None:

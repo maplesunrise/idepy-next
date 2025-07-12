@@ -1,4 +1,3 @@
-
 (function() {
     var platform = window.idepy.platform;
     var disableText = '%(text_select)s' === 'False';
@@ -97,5 +96,88 @@
     }
 
     disableTouchEvents();
+
+    // use easy resize
+    if (window.idepy.easy_resize !== 'False') {
+        function mountResizeHandles() {
+  const interval = setInterval(() => {
+  if (document.body) {
+      appendResizeHandles();
+      clearInterval(interval);
+    }
+  }, 50);
+
+  function appendResizeHandles() {
+const directions = [
+  'top', 'bottom', 'left', 'right',
+  'top-left', 'top-right', 'bottom-left', 'bottom-right'
+];
+
+const size = 8;
+
+directions.forEach(dir => {
+  const el = document.createElement('div');
+  el.className = 'resize-handle ' + dir;
+  el.style.position = 'absolute';
+  el.style.zIndex = '9999';
+  el.style.background = 'transparent';
+  el.style.cursor = getCursor(dir);
+
+
+  switch (dir) {
+    case 'top': el.style.top = '0'; el.style.left = size + 'px'; el.style.right = size + 'px'; el.style.height = size + 'px'; break;
+    case 'bottom': el.style.bottom = '0'; el.style.left = size + 'px'; el.style.right = size + 'px'; el.style.height = size + 'px'; break;
+    case 'left': el.style.left = '0'; el.style.top = size + 'px'; el.style.bottom = size + 'px'; el.style.width = size + 'px'; break;
+    case 'right': el.style.right = '0'; el.style.top = size + 'px'; el.style.bottom = size + 'px'; el.style.width = size + 'px'; break;
+    case 'top-left': el.style.top = '0'; el.style.left = '0'; el.style.width = size + 'px'; el.style.height = size + 'px'; break;
+    case 'top-right': el.style.top = '0'; el.style.right = '0'; el.style.width = size + 'px'; el.style.height = size + 'px'; break;
+    case 'bottom-left': el.style.bottom = '0'; el.style.left = '0'; el.style.width = size + 'px'; el.style.height = size + 'px'; break;
+    case 'bottom-right': el.style.bottom = '0'; el.style.right = '0'; el.style.width = size + 'px'; el.style.height = size + 'px'; break;
+  }
+
+  el.addEventListener('mousedown', () => {
+      if(!window.idepy._jsApiCallback){
+          return
+      }
+    window.idepy._jsApiCallback('idepyResizeStart', [dir], 'resize');
+  });
+
+  document.body.appendChild(el);
+});
+
+window.addEventListener('mouseup', () => {
+   if(!window.idepy._jsApiCallback){
+      return
+  }
+  window.idepy._jsApiCallback('idepyResizeStop', [], 'resize');
+});
+
+window.addEventListener('mousemove', () => {
+    if(!window.idepy._jsApiCallback){
+      return
+    }
+  window.idepy._jsApiCallback('idepyResizeMove', [], 'resize');
+});
+}
+
+  function getCursor(dir) {
+    switch (dir) {
+      case 'top':
+      case 'bottom': return 'ns-resize';
+      case 'left':
+      case 'right': return 'ew-resize';
+      case 'top-left':
+      case 'bottom-right': return 'nwse-resize';
+      case 'top-right':
+      case 'bottom-left': return 'nesw-resize';
+    }
+    return 'default';
+  }
+}
+        mountResizeHandles()
+    }
+
+
+
   })();
 
